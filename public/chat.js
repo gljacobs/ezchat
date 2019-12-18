@@ -25,6 +25,7 @@ msg.on("keypress", () => {
 socket.on("chat", (data) => {
     output.append(`<p><strong>${data.user}: </strong>${data.msg}</p>`);
     feedback.html("");
+    $("#chat-box").scrollTop($("#chat-box").prop("scrollHeight"));
 })
 
 socket.on("typing", (data) => {

@@ -4,20 +4,29 @@ var socket = io.connect('http://localhost:4000');
 //query DOM
 var msg = $("#message");
     user = $("#user"),
-    btn = $("#send"),
-    output = $("#output");
+    output = $("#output"),
+    feedback = $("#feedback"),
+    btn = $("#send");
 
-//create events for emition
+//create events for emission
 btn.on("click", () => {
     socket.emit("chat", {
         msg: msg.val(),
         user: user.val(),
-    })
+    });
     msg.val("");
+})
+
+msg.on("keypress", () => {
+    socket.emit("typing", user.val());
 })
 
 //listen for events
 socket.on("chat", (data) => {
-    output.append(`<p><strong>${data.user}: </strong>${data.msg}</p>`)
+    output.append(`<p><strong>${data.user}: </strong>${data.msg}</p>`);
+    feedback.html("");
 })
 
+socket.on("typing", (data) => {
+    feedback.html(`<p><em>${data} is typing...</em></p>`)
+})

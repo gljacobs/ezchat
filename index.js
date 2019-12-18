@@ -17,8 +17,13 @@ var io = socket(server);
 
 io.on("connection", (socket) => {
     console.log("Socket connection made:", socket.id);
-
+    //handle chat
     socket.on("chat", (data) => {
         io.sockets.emit("chat", data)
-    })
+    });
+    //handle typing
+    socket.on("typing", (data) => {
+        socket.broadcast.emit("typing", data)
+    });
 })
+

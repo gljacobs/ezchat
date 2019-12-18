@@ -10,11 +10,15 @@ var server = app.listen(PORT, () => {
 });
 
 //static files
-app.use(express.static('public'))
+app.use(express.static("public"))
 
 //socket setup
 var io = socket(server);
 
-io.on('connection', (socket) => {
+io.on("connection", (socket) => {
     console.log("Socket connection made:", socket.id);
+
+    socket.on("chat", (data) => {
+        io.sockets.emit("chat", data)
+    })
 })

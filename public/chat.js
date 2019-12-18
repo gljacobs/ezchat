@@ -1,5 +1,5 @@
 //make client connection
-var socket = io.connect('http://localhost:4000');
+var socket = io();
 
 //query DOM
 var msg = $("#message");

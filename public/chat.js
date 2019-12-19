@@ -31,5 +31,6 @@ socket.on("chat", (data) => {
 })
 
 socket.on("typing", (data) => {
-    feedback.html(`<p><em>${data} is typing...</em></p>`)
+    feedback.html(`<p><em>${data} is typing...</em></p>`);
+    $("#chat-box").scrollTop($("#chat-box").prop("scrollHeight"));
 })

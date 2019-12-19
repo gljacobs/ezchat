@@ -10,7 +10,7 @@ var msg = $("#message");
 
 //create events for emission
 btn.on("click", () => {
-    if (msg.val()) {
+    if (user.val() && msg.val()) {
         socket.emit("chat", {
             msg: msg.val(),
             user: user.val(),
